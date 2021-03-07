@@ -21,6 +21,7 @@ export default {
       this.isSaving = false
     },
     checkForm(){
+      this.errors = []
       if(!this.user.username){
         return this.errors.push('Need to login!')
       }
@@ -45,8 +46,8 @@ export default {
   .main
     .container
       .info
-        h2 Be patient!
-        p Ne kadar fazla bilgi verirsen, o kadar fazla petini bulma şansın da artar.
+        h2 Missing report form
+        p More info you give, the more chance to receive info about your pet. So start filling the report form now.
         .errors(v-if='errors.length')
           ul
             li(v-for='error in errors') {{error}} 
@@ -70,6 +71,12 @@ export default {
 }
 .info{
   width: 20rem;
+}
+.info h2{
+  font-size: 40px;
+}
+.info p{
+  font-size: 26px;
 }
 .reportForm{
   display: flex;
@@ -104,6 +111,7 @@ button{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   letter-spacing: 1px;
   cursor: pointer;
+  outline: none;
 }
 button:hover{
   background-color: #b15c5c;
