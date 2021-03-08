@@ -17,7 +17,7 @@ export default {
     async sendForm(){
       this.isSaving = true
       await this.postReport(this.report)
-      this.$router.push('/')
+      this.$router.push('/missings')
       this.isSaving = false
     },
     checkForm(){
