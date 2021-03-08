@@ -36,7 +36,6 @@ h4{
 .wrap{
   width: 720px;
   display: inline-block;
-  box-sizing: border-box;
   white-space: pre-line;
   word-wrap: break-word;
 }
@@ -45,5 +44,7 @@ h4{
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   overflow: hidden;
+  word-break: break-all;
+  width: 720px;
 }
 </style>

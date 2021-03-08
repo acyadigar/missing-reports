@@ -11,6 +11,9 @@ export default {
     ...mapState(['reports']),
     reportLen(){
       return this.reports.length
+    },
+    lastReports(){
+      return this.reports.reverse()
     }
   },
   methods:{
@@ -30,7 +33,7 @@ export default {
       .section
         h2(v-if='reportLen > 0') Hey there, there are {{reportLen}} reported missing pets here!
     .missings
-      ReportCard.card(v-for='report in reports' :report='report')
+      ReportCard.card(v-for='report in lastReports' :report='report')
 </template>
 
 <style scoped>

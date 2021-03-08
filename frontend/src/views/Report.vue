@@ -37,6 +37,9 @@ export default {
       if (!this.errors.length) {
         this.sendForm()
       }
+    },
+    refillForm(){
+      return this.errors = []
     }
   }
 }
@@ -44,13 +47,15 @@ export default {
 
 <template lang="pug">
   .main
+    .err-container(v-if='errors.length')
+      .err
+        ul
+          li(v-for='error in errors') {{error}}
+        button(@click='refillForm') OK
     .container
       .info
         h2 Missing report form
         p More info you give, the more chance to receive info about your pet. So start filling the report form now.
-        .errors(v-if='errors.length')
-          ul
-            li(v-for='error in errors') {{error}} 
       .reportForm
         h1.formHeader Missing Report
         label Image URL
@@ -63,6 +68,25 @@ export default {
 </template>
 
 <style scoped>
+.err-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.err{
+  position: fixed;
+  top: 25%;
+  background-color: rgba(255, 0, 0, 0.685);
+  text-align: center;
+  z-index: 1;
+  color: white;
+  font-weight: bold;
+}
+.err ul{
+  list-style-type: none;
+  padding: 0;
+  padding: 7px 3rem;
+}
 .container{
   display: flex;
   align-items: center;
@@ -120,14 +144,6 @@ button:hover{
   margin: 4px auto;
   padding-top: 2px;
   font-size: 24px;
-}
-.errors{
-  color: red;
-  font-weight: bold;
-}
-.errors ul{
-  padding: 0;
-  list-style-type: none;
 }
 @media (max-width: 900px){
   .container{

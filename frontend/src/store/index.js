@@ -12,7 +12,7 @@ export default new Vuex.Store({
   state: {
     user: {},
     reports : [],
-    currentUser: {}
+    currentUser: {},
   },
   mutations: {
     SET_REPORTS(state, data){
@@ -35,10 +35,12 @@ export default new Vuex.Store({
     },
     async register({commit}, data){
       const result = await http.post('/auth/register', data)
+      .catch(e => { throw e.response.data.message})
       commit('LOGIN', result.data)
     },
     async login({commit}, data){
       const result = await http.post('/auth/login', data)
+      .catch(e => { throw e.response.data.message})
       commit('LOGIN', result.data)
     },
     async postReport({commit}, data){

@@ -8,7 +8,6 @@ export default {
       user: {},
       isSaving: false,
       registering: true,
-      error: false
     }
   },
   computed:{
@@ -18,11 +17,11 @@ export default {
     async sendForm(){
       this.isSaving = true
       if (this.registering){
-      await this.register(this.user)
+      await this.register(this.user).catch(e => this.errors.push(e))
       } else {
-        await this.login(this.user)
+      await this.login(this.user).catch(e => this.errors.push(e))
       }
-      this.$router.push('/missings')
+      if(!this.errors.length) this.$router.push('/missings')
       this.isSaving = false
     },
     handleForms(){
@@ -30,51 +29,55 @@ export default {
     },
     checkForm(){
       this.errors = []
-      if (!this.user.username){
+      if (!this.user.username || this.user.username < 3){
         this.errors.push('Username not valid!')
-        this.error = true
       }
       if (!this.user.password || this.user.password.length < 6){
-        this.error = true
         this.errors.push('Password not valid!')
       }
       if (!this.errors.length) {
-        this.error = false
         this.sendForm()
       }
+    },
+    refillForm(){
+      return this.errors = []
     }
-  }
+  },
 }
 </script>
 
 <template lang='pug'>
   .main
+    .err(v-if='errors.length')
+      ul
+        li(v-for='error in errors') {{error}}
+      button(@click='refillForm') OK
     .banner
       .ban-info
         h1 petbook
         p Get your account and start sharing informations to get back your pet as quick as possible.
-    .loginForm(:class='{error: error}')
+    .loginForm
       input(type='text' placeholder='username' v-model='user.username')
       input(type='password' placeholder='password' v-model='user.password')
       button(v-if='registering' :disabled='isSaving' @click='checkForm') Register
       button(v-else :disabled='isSaving' @click='checkForm') Login
       a(@click='handleForms') Register / Login
-      .errors(v-if='errors.length')
-        ul
-          li(v-for='error in errors') {{error}}
-
-
 </template>
 
 <style scoped>
-.errors{
+.err{
+  position: fixed;
+  top: 25%;
+  background-color: rgba(255, 0, 0, 0.685);
   text-align: center;
-  color: red;
+  z-index: 1;
+  color: white;
   font-weight: bold;
 }
-.errors ul{
+.err ul{
   list-style-type: none;
   padding: 0;
+  padding: 7px 3rem;
 }
 .main{
   display: flex;
@@ -113,7 +116,7 @@ button{
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   letter-spacing: 1px;
   cursor: pointer;
-  outline: border;
+  outline: none;
 }
 button:hover{
   opacity: 0.8;
@@ -125,9 +128,6 @@ a{
   cursor: pointer;
   user-select: none;
   font-weight: bold;
-}
-.error{
-  box-shadow: 0 0 10px red;
 }
 .banner{
   text-align: center;
