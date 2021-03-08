@@ -148,12 +148,11 @@ a{
   padding: 0 10px;
 }
   .loginForm{
+    width: 15rem;
     margin: auto;
   }
   .banner{
-    margin: auto;
-  }
-  .banner{
+    margin: 0;
     width: 100%;
   }
 }
