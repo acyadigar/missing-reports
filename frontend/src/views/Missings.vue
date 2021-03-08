@@ -38,7 +38,7 @@ export default {
 
 <style scoped>
 .card{
-  margin: 0.5rem 0;
+  margin: 0.5rem auto;
 }
 .card:hover{
   box-shadow: 0 0 5px grey;

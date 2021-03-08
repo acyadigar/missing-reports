@@ -141,10 +141,11 @@ a{
 .ban-info p{
   font-size: 26px;
 }
-@media (max-width: 750px){
+@media (max-width: 900px){
   .main{
-  padding: 3rem 2rem;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
 }
   .loginForm{
     margin: auto;

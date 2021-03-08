@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/missings',
     name: 'Missings',
-    component: () => import('../views/Missing.vue')
+    component: () => import('../views/Missings.vue')
 
   },
   {

@@ -33,18 +33,17 @@ h4{
     margin: 0 5px 0 1rem;
     padding: 0;
 }
-.wrap{
-  width: 720px;
-  display: inline-block;
-  white-space: pre-line;
-  word-wrap: break-word;
-}
 .wrap p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 5;
   overflow: hidden;
   word-break: break-all;
-  width: 720px;
+  width: inherit;
+}
+@media (max-width: 900px){
+  .card{
+    width: 90%;
+  }
 }
 </style>
