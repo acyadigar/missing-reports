@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Auth from '../views/Auth'
+import Missings from '../views/Missings.vue'
+import Loading from '../components/Loading.vue'
 
 Vue.use(VueRouter)
 
@@ -14,14 +16,17 @@ const routes = [
   {
     path: '/missings',
     name: 'Missings',
-    component: () => import('../views/Missings.vue')
-
+    component: Missings
   },
   {
     path: '/report',
     name: 'Report',
     component: () => import('../views/Report.vue')
-
+  },
+  {
+    path: '/loading',
+    name: 'Loading',
+    component: Loading
   },
   {
     path: '/about',

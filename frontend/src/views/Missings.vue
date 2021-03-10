@@ -1,11 +1,13 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import ReportCard from '../components/ReportCard'
+import LoadingCard from '../components/Loading'
 
 export default {
   name: 'MissingReports',
   components:{
-    ReportCard
+    ReportCard,
+    LoadingCard
   },
   computed:{
     ...mapState(['reports']),
@@ -31,6 +33,7 @@ export default {
   .main
     .header
       .section
+      LoadingCard(v-if='!reports.length')
         h2(v-if='reportLen > 0') Hey there, there are {{reportLen}} reported missing pets here!
     .missings
       ReportCard.card(v-for='report in lastReports' :report='report')
