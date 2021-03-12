@@ -2,12 +2,20 @@
 import { mapActions, mapState } from 'vuex'
 import ReportCard from '../components/ReportCard'
 import LoadingCard from '../components/Loading'
+import Cities from '../components/cities'
 
 export default {
   name: 'MissingReports',
   components:{
     ReportCard,
-    LoadingCard
+    LoadingCard,
+    Cities
+  },
+  data(){
+    return {
+      isLoading: false,
+      filteredReps: []
+    }
   },
   computed:{
     ...mapState(['reports']),
@@ -16,14 +24,22 @@ export default {
     },
     lastReports(){
       return this.reports.reverse()
+    },
+    filteredRepsLen(){
+      return this.filteredReps.length
     }
   },
   methods:{
-    ...mapActions(['fetchReports'])
+    ...mapActions(['fetchReports']),
+    filtered(city){
+      this.filteredReps = this.reports.filter(report => report.location == city)
+    }
   },
   created(){
+    this.isLoading = true
     this.fetchReports()
-  }
+    this.isLoading = false
+  },
 
 }
 </script>
@@ -31,22 +47,29 @@ export default {
 
 <template lang="pug">
   .main
+    LoadingCard(v-if='isLoading')
+    Cities(v-show='!isLoading' v-on:filtered-reps="filtered($event)")
     .header
       .section
-      LoadingCard(v-if='!reports.length')
-        h2(v-if='reportLen > 0') Hey there, there are {{reportLen}} reported missing pets here!
+        h2(v-if='!filteredReps.length') Hey there, there are {{reportLen}} reported missing pets here!
+        h2(v-else) Hey there, there are {{filteredRepsLen}} reported missing pets here!
     .missings
-      ReportCard.card(v-for='report in lastReports' :report='report')
+      ReportCard.card(v-if='!filteredReps.length' 
+      v-for='report in lastReports' 
+      :report='report')
+
+      ReportCard.card(v-for='report in filteredReps' 
+      :report='report')
 </template>
 
 <style scoped>
+.section{
+  text-align: center;
+}
 .card{
   margin: 0.5rem auto;
 }
 .card:hover{
   box-shadow: 0 0 5px grey;
-}
-.section{
-  text-align: center;
 }
 </style>

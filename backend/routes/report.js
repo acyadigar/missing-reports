@@ -18,6 +18,12 @@ router.get('/:id/json', async (req, res) => {
   res.send(report)
 })
 
+router.get('/locations', async (req, res) => {
+  const reports = await ReportService.findAll()
+  const reportLocations = reports.map(report => `${report.location}`)
+  res.send(reportLocations)
+})
+
 router.post('/', async (req, res) => {
   const report = await ReportService.add(req.body)
   await UserService.post(report)

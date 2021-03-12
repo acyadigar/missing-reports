@@ -47,7 +47,7 @@ export default {
   display: block;
 }
 #nav{
-  background-color: rgb(212, 218, 131);
+  background-color: #f3a4a4;
 }
 #nav ul {
   display: flex;
@@ -58,7 +58,13 @@ export default {
 }
 #nav a {
   font-weight: bold;
-  color: #007ce2;
+  color: #00579e;
+  text-shadow: 0 0 2px rgb(255, 255, 255);
+}
+#nav a:hover{
+  color: white;
+  text-shadow: none;
+
 }
 .navUser{
   font-weight: bold;

@@ -54,8 +54,13 @@ export default new Vuex.Store({
     },
     logout({commit}){
       commit('LOGOUT')
-    }
+    },
+    async fetchOptions(){
+      const result = await http.get('/report/locations')
+      return result.data
+    },
+
   },
   modules: {
-  }
+  },
 })

@@ -10,7 +10,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Auth
-
   },
   {
     path: '/missings',
