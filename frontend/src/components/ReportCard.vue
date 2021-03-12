@@ -46,4 +46,22 @@ h4{
     width: 90%;
   }
 }
+@media (max-width: 500px){
+  img{
+    height: 90px;
+    width: 90px;
+  }
+  .card{
+    height: 90px;
+  }
+  .wrap p {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  word-break: break-all;
+  width: inherit;
+  }
+}
 </style>

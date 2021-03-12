@@ -34,7 +34,7 @@ export default {
 .logout{
   display: none;
   position: absolute;
-  background-color: rgb(212, 218, 131);
+  background-color: #f3a4a4;
   min-width: 70px;
   padding: 22px 0 0 0;
   text-align: center;

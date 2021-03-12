@@ -13,8 +13,8 @@ export default {
   },
   data(){
     return {
-      isLoading: false,
-      filteredReps: []
+      filteredReps: [],
+      isRepsLoading: false
     }
   },
   computed:{
@@ -36,9 +36,10 @@ export default {
     }
   },
   created(){
-    this.isLoading = true
-    this.fetchReports()
-    this.isLoading = false
+    this.isRepsLoading = true
+    this.fetchReports().then(() => {
+      this.isRepsLoading = false
+    })
   },
 
 }
@@ -47,8 +48,8 @@ export default {
 
 <template lang="pug">
   .main
-    LoadingCard(v-if='isLoading')
-    Cities(v-show='!isLoading' v-on:filtered-reps="filtered($event)")
+    LoadingCard(v-if='isRepsLoading')
+    Cities(v-show='!isRepsLoading' v-on:filtered-reps="filtered($event)")
     .header
       .section
         h2(v-if='!filteredReps.length') Hey there, there are {{reportLen}} reported missing pets here!
