@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template lang="pug">
-  a(:href='repUrl').card
+  router-link(:to='repUrl').card
     img(:src='report.url' alt='missing-pet')
     .report-content
       h4 {{report.location}}

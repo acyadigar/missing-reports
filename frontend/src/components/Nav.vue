@@ -35,13 +35,16 @@ export default {
   display: none;
   position: absolute;
   background-color: #f3a4a4;
-  min-width: 70px;
-  padding: 22px 0 0 0;
+  padding: 1rem;
+  padding-bottom: 0;
   text-align: center;
   z-index: 1;
   color: #0c53bd;
   font-weight: bold;
   cursor: pointer;
+}
+.logout p:hover{
+  color: white;
 }
 .div:hover .logout{
   display: block;

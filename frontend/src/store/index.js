@@ -12,7 +12,6 @@ export default new Vuex.Store({
   state: {
     user: {},
     reports : [],
-    currentUser: {},
   },
   mutations: {
     SET_REPORTS(state, data){
@@ -59,6 +58,9 @@ export default new Vuex.Store({
       }
       const result = await http.post('/report', reportData)
       commit('POST_REPORT', result.data)
+    },
+    async deleteReport(_, id){
+      await http.delete(`/report/${id}`)
     },
     logout({commit}){
       commit('LOGOUT')
