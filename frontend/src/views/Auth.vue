@@ -95,7 +95,7 @@ export default {
   flex-direction: column;
   box-shadow: 0 10px 10px rgba(204, 204, 204, 0.712);
   padding: 2rem;
-  width: 20rem;
+  width: 25rem;
   margin: 0 10px;
   position: relative;
 }
@@ -135,9 +135,9 @@ a{
 }
 .banner{
   text-align: center;
-  width: 40%;
   margin: 10px;
   height: 20rem;
+  width: 20rem;
 }
 .ban-info h1{
   font-size: 40px;
@@ -150,6 +150,7 @@ a{
   display: flex;
   flex-direction: column;
   padding: 0 10px;
+  margin-bottom: 1rem;
 }
   .loginForm{
     width: 15rem;
@@ -158,6 +159,7 @@ a{
   .banner{
     margin: 0;
     width: 100%;
+    height: 15rem;
   }
 }
 </style>

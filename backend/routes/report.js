@@ -15,6 +15,9 @@ router.get('/all/json', async (req, res) => {
 
 router.get('/:id/json', async (req, res) => {
   const report = await ReportService.find(req.params.id)
+  .catch(() => {
+    return res.status(404).send({message:'No report found!'})
+  })
   res.send(report)
 })
 

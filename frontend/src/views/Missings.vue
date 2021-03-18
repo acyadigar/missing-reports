@@ -70,7 +70,4 @@ export default {
 .card{
   margin: 0.5rem auto;
 }
-.card:hover{
-  box-shadow: 0 0 5px grey;
-}
 </style>

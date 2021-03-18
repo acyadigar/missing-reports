@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Auth from '../views/Auth'
 import Missings from '../views/Missings.vue'
+import Report from '../views/Report.vue'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,13 @@ const routes = [
   {
     path: '/report',
     name: 'Report',
-    component: () => import('../views/Report.vue')
+    component: Report
+  },
+  {
+    path: '/report/:id',
+    name: 'Report Details',
+    component: () => import('../views/ReportDetails.vue')
+
   },
   {
     path: '/about',

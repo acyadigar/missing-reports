@@ -18,6 +18,9 @@ export default new Vuex.Store({
     SET_REPORTS(state, data){
       state.reports = data
     },
+    SET_REPORT(state, data){
+      state.report = data
+    },
     LOGIN(state, data){
       state.user = data
     },
@@ -32,6 +35,11 @@ export default new Vuex.Store({
     async fetchReports({commit}){
       const result = await http.get('/report/all/json')
       commit('SET_REPORTS', result.data)
+    },
+    async fetchReport(_,id){
+      const result = await http.get(`/report/${id}/json`)
+      .catch(e => { throw e.response.data.message})
+      return result.data
     },
     async register({commit}, data){
       const result = await http.post('/auth/register', data)
@@ -59,7 +67,6 @@ export default new Vuex.Store({
       const result = await http.get('/report/locations')
       return result.data
     },
-
   },
   modules: {
   },

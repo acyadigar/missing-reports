@@ -155,4 +155,22 @@ button:hover{
     margin: auto;
   }
 }
+@media (min-width: 1900px){
+  .container{
+    padding: 1rem 25rem;
+  }
+  .info{
+    width: 25rem;
+  }
+  .reportForm{
+    height: 35rem;
+    padding: 2rem 2rem 2rem 3rem;
+  }
+  .reportForm input {
+    margin: 1rem;
+  }
+  .reportForm h1, .reportForm button{
+    margin: 1rem auto;
+  }
+}
 </style>
