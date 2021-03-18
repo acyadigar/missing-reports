@@ -26,7 +26,6 @@ const routes = [
     path: '/report/:id',
     name: 'Report Details',
     component: () => import('../views/ReportDetails.vue')
-
   },
   {
     path: '/about',
