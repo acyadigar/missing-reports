@@ -47,47 +47,27 @@ export default {
 
 <template lang="pug">
   .main
-    .err-container(v-if='errors.length')
-      .err
+    .info
+      h2 Missing report form
+      p More info you give, the more chance to receive info about your pet. So start filling the report form now.
+    .reportForm
+      h1.formHeader Missing Report
+      label Image URL
+      input(type='text' placeholder='An uploaded photo of your pet' v-model='report.url')
+      label Location
+      input(type='text' v-model='report.location')
+      label Info:
+      textarea(rows='8' v-model='report.info')
+      button(@click='checkForm' :disabled='isSaving') Report!
+    transition(name='slide-fade')
+      .err(v-if='errors.length')
         ul
           li(v-for='error in errors') {{error}}
         button(@click='refillForm') OK
-    .container
-      .info
-        h2 Missing report form
-        p More info you give, the more chance to receive info about your pet. So start filling the report form now.
-      .reportForm
-        h1.formHeader Missing Report
-        label Image URL
-        input(type='text' placeholder='An uploaded photo of your pet' v-model='report.url')
-        label Location
-        input(type='text' v-model='report.location')
-        label Info:
-        textarea(rows='8' v-model='report.info')
-        button(@click='checkForm' :disabled='isSaving') Report!
 </template>
 
 <style scoped>
-.err-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.err{
-  position: fixed;
-  top: 25%;
-  background-color: rgba(255, 0, 0, 0.685);
-  text-align: center;
-  z-index: 1;
-  color: white;
-  font-weight: bold;
-}
-.err ul{
-  list-style-type: none;
-  padding: 0;
-  padding: 7px 3rem;
-}
-.container{
+.main{
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -146,13 +126,14 @@ button:hover{
   font-size: 24px;
 }
 @media (max-width: 900px){
-  .container{
-    display: block;
+  .main{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
     text-align: center;
-    padding: 0;
   }
-  .info, .reportForm{
-    margin: auto;
+  .reportForm {
+    margin: auto 20px;
   }
 }
 @media (min-width: 1900px){

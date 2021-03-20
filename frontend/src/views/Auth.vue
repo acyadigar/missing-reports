@@ -52,10 +52,11 @@ export default {
 
 <template lang='pug'>
   .main
-    .err(v-if='errors.length')
-      ul
-        li(v-for='error in errors') {{error}}
-      button(@click='refillForm') OK
+    transition(name='slide-fade')
+      .err(v-if='errors.length')
+        ul
+          li(v-for='error in errors') {{error}}
+        button(@click='refillForm') OK
     .banner
       .ban-info
         h1 petbook
@@ -69,20 +70,6 @@ export default {
 </template>
 
 <style scoped>
-.err{
-  position: fixed;
-  top: 25%;
-  background-color: rgba(255, 0, 0, 0.685);
-  text-align: center;
-  z-index: 1;
-  color: white;
-  font-weight: bold;
-}
-.err ul{
-  list-style-type: none;
-  padding: 0;
-  padding: 7px 3rem;
-}
 .main{
   display: flex;
   justify-content: space-evenly;
