@@ -33,7 +33,7 @@ export default {
     },
     checkForm(){
       this.errors = []
-      if (!this.user.username || this.user.username < 3){
+      if (!this.user.username || this.user.username.length < 3){
         this.errors.push('Username not valid!')
       }
       if (!this.user.password || this.user.password.length < 6){
