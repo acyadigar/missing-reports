@@ -26,6 +26,10 @@ export default new Vuex.Store({
     POST_REPORT(state, data){
       state.reports.push(data)
     },
+    UPDATE_REPORT(state, data){
+      let report = state.reports.find(report => report._id == data._id)
+      report = data
+    },
     LOGOUT(state){
       state.user = {}
     }
@@ -58,6 +62,10 @@ export default new Vuex.Store({
       }
       const result = await http.post('/report', reportData)
       commit('POST_REPORT', result.data)
+    },
+    async updateReport({commit}, data){
+      const result = await http.patch(`/report/${data._id}`, data)
+      commit('UPDATE_REPORT', result.data) 
     },
     async deleteReport(_, id){
       await http.delete(`/report/${id}`)

@@ -1,6 +1,11 @@
 # missing-pets
 
 * has a basic authentication system
-* users can share posts
+
+Users can;
+* create
+* read
+* update
+* and delete posts.
 
 Link here: https://acy-frontend-app.herokuapp.com/

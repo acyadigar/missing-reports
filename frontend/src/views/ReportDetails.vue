@@ -1,10 +1,15 @@
 <script>
 import { mapActions, mapState } from 'vuex'
+import Edit from '../components/Edit'
 export default {
+  components: {
+    Edit
+  },
   data(){
     return{
       report: {},
-      error: ''
+      error: '',
+      isEditing: false
     }
   },
   computed:{
@@ -22,6 +27,9 @@ export default {
       await this.deleteReport(this.report._id)
       .catch(() => this.error = 'An error occured while deleting!')
       this.$router.push('/missings')
+    },
+    toggleEdit(){
+      this.isEditing = !this.isEditing
     }
   },
   created() {
@@ -35,28 +43,36 @@ export default {
 </script>
 
 <template lang="pug">
-  .main
+.main
+  .edit
+    Edit(:report='report' :isEditing='isEditing')
+  .report
     .err(v-if='error') 
       h1 {{error}}
     .reportImg(v-if='report.info')
       img(:src='imgUrl' alt='cat-missing') 
       p Owner is 
         router-link(:to='authorUrl') {{report.author}}
-      .delete(v-if='user.username == report.author')
+      .delete-edit(v-if='user.username == report.author')
         button(@click='handleDelete') Delete
+        button(@click='toggleEdit') Edit
     .reportContent
       h2 {{report.location}}
       p {{report.info}}
 </template>
   
 <style scoped>
+.edit{
+  display: flex;
+  justify-content: center;
+}
 img{
   border-right: 5px solid crimson;
   padding-right: 1rem;
   width: 400px;
   height: 350px;
 }
-.main{
+.report{
   padding: 3rem;
   display: flex;
 }
@@ -66,7 +82,12 @@ img{
   white-space: pre-wrap;
   width: 60%;
 }
-.delete button{
+.delete-edit{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.delete-edit button{
   width: 7rem;
   padding: 10px;
   color: white;
@@ -78,7 +99,15 @@ img{
   cursor: pointer;
   outline: none;
 }
-.delete button:hover{
+.delete-edit button:nth-child(2){
+  background-color: rgb(230, 230, 52);
+  font-weight: 800;
+  color: black;
+}
+.delete-edit button:nth-child(2):hover{
+  background-color: rgb(224, 224, 0);
+}
+.delete-edit button:hover{
   background-color: #b15c5c;
 }
 @media ( max-width: 700px){

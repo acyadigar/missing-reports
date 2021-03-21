@@ -14,7 +14,6 @@ export default {
 
 </script>
 
-
 <template lang="pug">
   #app
     .main
@@ -24,7 +23,7 @@ export default {
 
 
 <style>
-@import '../styles/style.css';
+@import 'styles/style.css';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

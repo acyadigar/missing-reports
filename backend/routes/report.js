@@ -33,6 +33,12 @@ router.post('/', async (req, res) => {
   res.send(report)
 })
 
+router.patch('/:id', async (req, res) => {
+  await ReportService.update(req.params.id, req.body)
+  const updatedReport = await ReportService.find(req.params.id)
+  res.send(updatedReport)
+})
+
 router.delete('/:id', async (req, res) => {
   const report = await ReportService.del(req.params.id)
   res.send(report)
