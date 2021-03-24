@@ -49,7 +49,7 @@ export default {
   .report
     .err(v-if='error') 
       h1 {{error}}
-    .reportImg(v-if='report.info')
+    .reportSideBar(v-if='report.info')
       img(:src='imgUrl' alt='cat-missing') 
       p Owner is 
         router-link(:to='authorUrl') {{report.author}}
@@ -110,20 +110,32 @@ img{
 .delete-edit button:hover{
   background-color: #b15c5c;
 }
-@media ( max-width: 700px){
-  .main{
-    display: block;
-    text-align: center;
-  }
+@media ( max-width: 800px){
   img{
-    border-right: none;
-    padding-right: none;
-    width: 95%;
-    height: 95%;
+    width: 300px;
+    height: 300px;
+    border: none;
+    padding: 0;
+    border-bottom: 5px solid crimson;
+    padding-bottom: 1rem;
+  }
+  .report{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .reportContent{
-    width: 95%;
-    margin: 0;
+    width: 75%;
+    word-break: keep-all;
+  }
+  .reportContent h2 {
+    text-align: center;
+  }
+}
+
+@media (min-width: 1900px){
+  .reportContent{
+    width: 50%;
   }
 }
 </style>
