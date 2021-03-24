@@ -59,11 +59,10 @@ export default {
       label Info:
       textarea(rows='8' v-model='report.info')
       button(@click='checkForm' :disabled='isSaving') Report!
-    transition(name='slide-fade')
-      .err(v-if='errors.length')
-        ul
-          li(v-for='error in errors') {{error}}
-        button(@click='refillForm') OK
+    .err(v-if='errors.length')
+      ul
+        li(v-for='error in errors') {{error}}
+      button(@click='refillForm') OK
 </template>
 
 <style scoped>

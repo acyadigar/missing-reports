@@ -56,9 +56,13 @@ export default new Vuex.Store({
     },
     async postReport({commit}, data){
       const user = this.state.user.username
+      const email = this.state.user.email
       const reportData = {
         ...data,
-        author: user
+        author: {
+          username: user,
+          email: email
+        }
       }
       const result = await http.post('/report', reportData)
       commit('POST_REPORT', result.data)

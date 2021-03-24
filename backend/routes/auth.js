@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs')
 const UserService = require('../services/user-service')
 
 router.post('/register', async (req, res) => {
-    const { username, password } = req.body
+    const { username, password, email } = req.body
 
     if(await UserService.findByUsername(username)) {
       return res.status(409).send({message:'User already exist!'})
@@ -12,6 +12,7 @@ router.post('/register', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 8)
     const user = await UserService.add({
+        email: email,
         username: username,
         password: hashedPassword
     })

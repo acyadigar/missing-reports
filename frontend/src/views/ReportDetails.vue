@@ -9,16 +9,14 @@ export default {
     return{
       report: {},
       error: '',
-      isEditing: false
+      isEditing: false,
+      contactPopup: false
     }
   },
   computed:{
     ...mapState(['user']),
     imgUrl(){
       return this.report.url
-    },
-    authorUrl(){
-      return `/report/${this.report.author}`
     }
   },
   methods:{
@@ -30,6 +28,9 @@ export default {
     },
     toggleEdit(){
       this.isEditing = !this.isEditing
+    },
+    togglePopup(){
+      this.contactPopup = !this.contactPopup
     }
   },
   created() {
@@ -52,8 +53,12 @@ export default {
     .reportSideBar(v-if='report.info')
       img(:src='imgUrl' alt='cat-missing') 
       p Owner is 
-        router-link(:to='authorUrl') {{report.author}}
-      .delete-edit(v-if='user.username == report.author')
+        button.btnPopup(@click='togglePopup') {{report.author.username}}
+        .userpop(v-if='contactPopup')
+          p {{report.author.username}}'s contact infos:
+          ul
+            li Email: {{report.author.email}}
+      .delete-edit(v-if='user.username == report.author.username')
         button(@click='handleDelete') Delete
         button(@click='toggleEdit') Edit
     .reportContent
@@ -62,6 +67,34 @@ export default {
 </template>
   
 <style scoped>
+.btnPopup{
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  color: crimson;
+  cursor: pointer;
+}
+.btnPopup:focus{
+  outline: 0;
+}
+.btnPopup:hover{
+  text-decoration: underline;
+}
+.userpop ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.userpop p{
+  margin-top: .3rem;
+}
+.userpop{
+  border: 1px solid;
+  background-color: white;
+  position: absolute;
+  z-index: 9998;
+  padding: 0 1rem .2rem 1rem;
+}
 .edit{
   display: flex;
   justify-content: center;

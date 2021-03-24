@@ -8,7 +8,7 @@ class UserService extends BaseService{
     return this.model.findOne({username: username})
   }
   async post(report){
-    const user = await this.model.findOne({username: report.author})
+    const user = await this.model.findOne({username: report.author.username})
     user.reports.push(report)
     await user.save()
   }

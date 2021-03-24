@@ -2,7 +2,10 @@ const mongoose = require("mongoose");
 
 const ReportSchema = new mongoose.Schema({
   url: String,
-  author: String,
+  author: {
+    username: String,
+    email: String
+  },
   location: {
     type: String,
     minlength: 2,

@@ -33,6 +33,9 @@ export default {
     },
     checkForm(){
       this.errors = []
+      if (this.registering && !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.user.email)){
+        this.errors.push('E-mail not valid!')
+      }
       if (!this.user.username || this.user.username.length < 3){
         this.errors.push('Username not valid!')
       }
@@ -52,16 +55,16 @@ export default {
 
 <template lang='pug'>
   .main
-    transition(name='slide-fade')
-      .err(v-if='errors.length')
-        ul
-          li(v-for='error in errors') {{error}}
-        button(@click='refillForm') OK
+    .err(v-if='errors.length')
+      ul
+        li(v-for='error in errors') {{error}}
+      button(@click='refillForm') OK
     .banner
       .ban-info
         h1 petbook
         p Get your account and start sharing informations to get back your pet as quick as possible.
     .loginForm
+      input(v-if='registering' type='text' placeholder='e-mail' v-model='user.email')
       input(type='text' placeholder='username' v-model='user.username')
       input(type='password' placeholder='password' v-model='user.password')
       button(v-if='registering' :disabled='isSaving' @click='checkForm') Register
