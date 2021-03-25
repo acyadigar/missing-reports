@@ -20,7 +20,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['fetchReport', 'deleteReport']),
+    ...mapActions(['fetchReport', 'deleteReport', 'updateReport']),
     async handleDelete(){
       await this.deleteReport(this.report._id)
       .catch(() => this.error = 'An error occured while deleting!')
@@ -31,6 +31,10 @@ export default {
     },
     togglePopup(){
       this.contactPopup = !this.contactPopup
+    },
+    editReport(){
+      this.updateReport(this.report)
+      this.isEditing = false
     }
   },
   created() {
@@ -46,7 +50,7 @@ export default {
 <template lang="pug">
 .main
   .edit
-    Edit(:report='report' :isEditing='isEditing')
+    Edit(:report='report' :isEditing='isEditing' @edit-info='editReport')
   .report
     .err(v-if='error') 
       h1 {{error}}

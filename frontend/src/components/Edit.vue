@@ -1,15 +1,7 @@
 <script>
-import { mapActions } from 'vuex'
 export default {
   name: 'ReportEditing',
   props:['report', 'isEditing'],
-  methods:{
-    ...mapActions(['updateReport']),
-    sendUpdate(){
-      this.updateReport(this.report)
-      this.isEditing = false
-    }
-  }
 }
 </script>
 
@@ -18,7 +10,7 @@ transition(name='slide-fade-v')
   .form(v-show='isEditing')
     .info
       textarea(v-model='report.info')
-    button(@click='sendUpdate') Edit
+    button(@click="$emit('edit-info')") Edit
 </template>
 
 <style scoped>

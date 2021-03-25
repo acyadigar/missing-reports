@@ -1,11 +1,7 @@
 <script>
-import Loading from '../components/Loading'
 import { mapActions } from 'vuex'
 export default {
   name: 'Login',
-  components:{
-    Loading
-  },
   data(){
     return{
       errors : [],
