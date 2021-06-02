@@ -1,15 +1,22 @@
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Nav from './components/Nav'
 
 export default {
-  computed:{
+  components: {
+    Nav
+  },
+  computed: {
     ...mapState(['user'])
   },
-  components:{
-    Nav
+  methods: {
+    ...mapActions(['otoLogin'])
+  },
+  created() {
+    if (localStorage.getItem('token')) {
+      this.otoLogin()
+    }
   }
-  
 }
 
 </script>

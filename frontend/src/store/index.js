@@ -6,6 +6,7 @@ Vue.use(Vuex)
 
 const http = axios.create({
   baseURL: process.env.VUE_APP_API_URL || 'http://localhost:3000',
+  headers: { authorization: `Bearer ${localStorage.getItem('token')}`}
 });
 
 export default new Vuex.Store({
@@ -21,7 +22,8 @@ export default new Vuex.Store({
       state.report = data
     },
     LOGIN(state, data){
-      state.user = data
+      state.user = data.user
+      localStorage.setItem('token', data.token)
     },
     POST_REPORT(state, data){
       state.reports.push(data)
@@ -32,6 +34,10 @@ export default new Vuex.Store({
     },
     LOGOUT(state){
       state.user = {}
+      localStorage.removeItem('token')
+    },
+    OTOLOGIN(state, data){
+      state.user = data
     }
   },
   actions: {
@@ -81,7 +87,10 @@ export default new Vuex.Store({
       const result = await http.get('/report/locations')
       return result.data
     },
-  },
-  modules: {
+    async otoLogin({commit}) {
+      const token = localStorage.getItem('token')
+      const result = await http.post('/auth/otologin', token)
+      commit('OTOLOGIN', result.data)
+    }
   },
 })
