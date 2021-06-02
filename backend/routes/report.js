@@ -2,6 +2,7 @@ const router = require('express').Router()
 
 const UserService = require('../services/user-service')
 const ReportService = require('../services/report-service')
+const isLoggedin = require('../middlewares/isLoggedin')
 
 router.get('/all', async (req, res) => {
   const reports = await ReportService.findAll()
@@ -27,19 +28,19 @@ router.get('/locations', async (req, res) => {
   res.send(reportLocations)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', isLoggedin, async (req, res) => {
   const report = await ReportService.add(req.body)
   await UserService.post(report)
   res.send(report)
 })
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', isLoggedin, async (req, res) => {
   await ReportService.update(req.params.id, req.body)
   const updatedReport = await ReportService.find(req.params.id)
   res.send(updatedReport)
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isLoggedin, async (req, res) => {
   const report = await ReportService.del(req.params.id)
   res.send(report)
 })
