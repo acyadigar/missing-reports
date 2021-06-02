@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const UserService = require('./user-service')
+require('dotenv').config()
 
 class AuthService {
   async register(user) {
@@ -18,14 +19,14 @@ class AuthService {
     return {user, token}
   }
   check(token) {
-      const decodedToken = jwt.verify(token, 'secretKey')
+      const decodedToken = jwt.verify(token, process.env.JWT_KEY)
       if (!decodedToken) throw 'No token available!'
       return decodedToken
   }
 }
 
 const signToken = (payload) => {
-  const token = jwt.sign({...payload, iat: Date.now()}, 'secretKey', {expiresIn: '1d'})
+  const token = jwt.sign({...payload, iat: Date.now()}, process.env.JWT_KEY, {expiresIn: '1d'})
   return token
 }
 
